@@ -108,7 +108,7 @@ CARDS = [
     },
     {
         "id": "card-patterns",
-        "title": "Pattern Engine (150+ patterns, 20 gradients)",
+        "title": "Pattern Engine (500+ patterns, 20 gradients)",
         "filename": "pattern_engine.py",
         "badge": "Grasshopper",
         "path": os.path.join(ROOT, "pattern_engine.py"),
