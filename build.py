@@ -138,7 +138,12 @@ def build():
     with open(template_path, "r", encoding="utf-8") as f:
         html = f.read()
 
-    html = html.replace("CARD_DATA_PLACEHOLDER", card_data_js)
+    import re
+    html = re.sub(
+        r"(const cards = \[)\n.*?\n(\];)",
+        r"\1\n" + card_data_js + r"\n\2",
+        html, count=1, flags=re.DOTALL,
+    )
 
     out_path = os.path.join(BASE, "index.html")
     with open(out_path, "w", encoding="utf-8") as f:
