@@ -138,12 +138,11 @@ def build():
     with open(template_path, "r", encoding="utf-8") as f:
         html = f.read()
 
-    import re
-    html = re.sub(
-        r"(const cards = \[)\n.*?\n(\];)",
-        r"\1\n" + card_data_js + r"\n\2",
-        html, count=1, flags=re.DOTALL,
-    )
+    start_marker = "const cards = ["
+    end_marker = "];"
+    i = html.index(start_marker)
+    j = html.index(end_marker, i) + len(end_marker)
+    html = html[:i] + start_marker + "\n" + card_data_js + "\n" + end_marker + html[j:]
 
     out_path = os.path.join(BASE, "index.html")
     with open(out_path, "w", encoding="utf-8") as f:
